@@ -16,7 +16,7 @@ jobs:
       - name: Rewrite links and update GitHub profile README
         run: |
           mkdir -p profile
-          sed 's|https://codeberg.org|https://github.com|g' README.md > profile/README.md
+          sed 's|https://codeberg.org|https://github.com|g' README.md > README.md
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@://github.com"
           git checkout main
