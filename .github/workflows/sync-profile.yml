@@ -20,11 +20,12 @@ jobs:
 
       - name: Rewrite links and update GitHub profile README
         run: |
-          sed 's|https://codeberg.org|https://github.com|g' README.md > README.md
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@://github.com"
           git checkout main
           git pull
+          sed 's|https://codeberg.org|https://github.com|g' README.md > README.md.tmp 
+          mv README.md.tmp README.md
           git add README.md
           git commit -m "chore: sync profile README from Codeberg" || exit 0
           git push origin main
