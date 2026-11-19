@@ -9,10 +9,15 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    
     permissions:
       contents: write
+      
     steps:
-      - uses: actions/checkout@v4
+      # Check out repository code onto the runner.
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Rewrite links and update GitHub profile README
         run: |
           mkdir -p profile
@@ -20,6 +25,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@://github.com"
           git checkout main
+          git pull
           git add profile/README.md
           git commit -m "chore: sync profile README from Codeberg" || exit 0
           git push origin main
